@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quickfixx - Technical Support Across Bangladesh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1a5fce;
+            --dark-blue: #0d4ab5;
+            --accent-orange: #ff6b35;
+            --white: #ffffff;
+            --light-gray: #f5f7fa;
+            --text-dark: #2d3748;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span {
+            color: var(--accent-orange);
+        }
+        
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .nav-btn {
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a5fce 0%, #0d4ab5 100%);
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--primary-blue);
+            padding: 15px 35px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            border: 2px solid white;
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-blue);
+        }
+        
+        .call-now-btn {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3); }
+            50% { box-shadow: 0 6px 25px rgba(255, 107, 53, 0.5); }
+            100% { box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3); }
+        }
+        
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+        
+        .badge i {
+            color: var(--accent-orange);
+            font-size: 20px;
+        }
+        
+        /* Services */
+        .services {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            color: var(--primary-blue);
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        /* Booking Form */
+        .booking {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+        }
+        
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        .btn-submit {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #4b5563;
+            color: #9ca3af;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+                font-size: 24px;
+                cursor: pointer;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-tools"></i>
+                    Quick<span>fixx</span>
+                </a>
+                
+                <nav>
+                    <a href="#services">Services</a>
+                    <a href="#booking">Book Now</a>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="reviews.html">Reviews</a>
+                    <a href="#contact" class="nav-btn">Call Now</a>
+                </nav>
+                
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Fast, Reliable Technical Support Across Bangladesh</h1>
+            <p>Expert CCTV installation, smart home setup, IT support, and quick fix services. Professional technicians ready to serve your home or business.</p>
+            
+            <div class="hero-buttons">
+                <a href="#booking" class="btn-primary">
+                    <i class="fas fa-calendar-check"></i> Book Service Now
+                </a>
+                <a href="dashboard.html" class="btn-secondary">
+                    <i class="fas fa-chart-line"></i> View Dashboard
+                </a>
+                <a href="#services" class="btn-secondary">
+                    <i class="fas fa-list"></i> Our Services
+                </a>
+            </div>
+            
+            <a href="tel:+8801712345678" class="call-now-btn">
+                <i class="fas fa-phone-alt"></i> CALL NOW: +880 1712-345678
+            </a>
+            
+            <div class="trust-badges">
+                <div class="badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Trusted</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-bolt"></i>
+                    <span>Fast Service</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-tag"></i>
+                    <span>Affordable</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Expert Services</h2>
+                <p>Professional solutions for homes and businesses</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>CCTV Installation</h3>
+                    <p>Professional security camera installation with remote monitoring setup.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Smart Home Setup</h3>
+                    <p>Smart lighting, security systems, and home automation solutions.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>IT Support</h3>
+                    <p>Network setup, troubleshooting, and ongoing technical support.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3>Quick Fix Services</h3>
+                    <p>Urgent repairs for electrical issues and appliance troubleshooting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form -->
+    <section id="booking" class="booking">
+        <div class="container">
+            <div class="section-title">
+                <h2>Book Your Service</h2>
+                <p>Fill the form below and we'll contact you within 30 minutes</p>
+            </div>
+            
+            <div class="booking-form">
+                <!-- REPLACE with your Google Form link -->
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScMV4KjTZrGpQeQYz7qW8HfvL7B6KQ9gKjZbHvJ5N4lLm9n0w/viewform?embedded=true" 
+                        width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">
+                    Loading…
+                </iframe>
+                <p style="text-align: center; margin-top: 20px; color: #666;">
+                    <small>Or call directly: +880 1712-345678</small>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="logo" style="color: white; margin-bottom: 20px;">
+                        <i class="fas fa-tools"></i>
+                        Quick<span style="color: #ff6b35;">fixx</span>
+                    </div>
+                    <p>Fast technical support across Bangladesh</p>
+                </div>
+                
+                <div>
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-phone"></i> +880 1712-345678</p>
+                    <p><i class="fas fa-envelope"></i> support@quickfixx.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Serving all Bangladesh</p>
+                </div>
+                
+                <div>
+                    <h3>Quick Links</h3>
+                    <p><a href="index.html" style="color: white;">Home</a></p>
+                    <p><a href="dashboard.html" style="color: white;">Dashboard</a></p>
+                    <p><a href="reviews.html" style="color: white;">Customer Reviews</a></p>
+                    <p><a href="staff.html" style="color: white;">Staff Verification</a></p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Quickfixx. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const nav = document.querySelector('nav');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Form submission
+        document.querySelectorAll('a[href="#booking"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
