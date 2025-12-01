@@ -26,6 +26,7 @@
             background-color: var(--light-gray);
             color: var(--text-dark);
             line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
         
         .container {
@@ -89,12 +90,44 @@
             font-weight: 600;
         }
         
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            margin-left: 15px;
+        }
+        
+        .dark-mode-toggle:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary-blue);
+        }
+        
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #1a5fce 0%, #0d4ab5 100%);
             color: var(--white);
             padding: 100px 0;
             text-align: center;
+            transition: background 0.5s ease;
         }
         
         .hero h1 {
@@ -204,6 +237,7 @@
         .services {
             padding: 80px 0;
             background: var(--white);
+            transition: background-color 0.5s ease;
         }
         
         .section-title {
@@ -228,7 +262,7 @@
             border-radius: 10px;
             padding: 30px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: transform 0.3s, background-color 0.5s ease;
         }
         
         .service-card:hover {
@@ -245,6 +279,7 @@
         .booking {
             padding: 80px 0;
             background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+            transition: background 0.5s ease;
         }
         
         .booking-form {
@@ -254,6 +289,7 @@
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: background-color 0.5s ease;
         }
         
         .form-group {
@@ -266,6 +302,7 @@
             border: 1px solid #d1d5db;
             border-radius: 6px;
             font-size: 16px;
+            transition: all 0.5s ease;
         }
         
         .btn-submit {
@@ -278,6 +315,7 @@
             font-weight: 600;
             cursor: pointer;
             width: 100%;
+            transition: all 0.5s ease;
         }
         
         /* Footer */
@@ -285,6 +323,7 @@
             background: var(--text-dark);
             color: white;
             padding: 60px 0 30px;
+            transition: background-color 0.5s ease;
         }
         
         .footer-content {
@@ -301,8 +340,106 @@
             color: #9ca3af;
         }
         
-        /* Responsive */
+        /* ===== DARK MODE STYLES ===== */
+        [data-theme="dark"] {
+            --primary-blue: #3b82f6;
+            --dark-blue: #2563eb;
+            --accent-orange: #fb923c;
+            --white: #1f2937;
+            --light-gray: #111827;
+            --text-dark: #f3f4f6;
+        }
+        
+        [data-theme="dark"] body {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+        }
+        
+        [data-theme="dark"] header,
+        [data-theme="dark"] .services,
+        [data-theme="dark"] .service-card,
+        [data-theme="dark"] .booking-form {
+            background-color: var(--white);
+        }
+        
+        [data-theme="dark"] .hero {
+            background: linear-gradient(135deg, #0d4ab5 0%, #1e3a8a 100%);
+        }
+        
+        [data-theme="dark"] .booking {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        [data-theme="dark"] footer {
+            background-color: #111827;
+        }
+        
+        [data-theme="dark"] .service-card {
+            background-color: #374151;
+            border: 1px solid #4b5563;
+        }
+        
+        [data-theme="dark"] .form-control {
+            background-color: #4b5563;
+            border-color: #6b7280;
+            color: #f3f4f6;
+        }
+        
+        [data-theme="dark"] .form-control::placeholder {
+            color: #9ca3af;
+        }
+        
+        /* ===== MOBILE MENU FIXES ===== */
         @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav:not(.mobile-active) {
+                display: none;
+            }
+            
+            nav.mobile-active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                z-index: 999;
+                gap: 15px;
+            }
+            
+            [data-theme="dark"] nav.mobile-active {
+                background-color: var(--white);
+            }
+            
+            nav.mobile-active a {
+                padding: 15px;
+                text-align: center;
+                border-bottom: 1px solid #eee;
+                width: 100%;
+            }
+            
+            [data-theme="dark"] nav.mobile-active a {
+                border-bottom-color: #4b5563;
+            }
+            
+            nav.mobile-active a:last-child {
+                border-bottom: none;
+            }
+            
+            nav.mobile-active .dark-mode-toggle {
+                margin: 15px auto 0;
+            }
+            
+            .navbar {
+                position: relative;
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -317,93 +454,22 @@
                 max-width: 300px;
                 justify-content: center;
             }
-            
-            nav {
-                display: none;
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
             }
             
-            .mobile-menu {
-                display: block;
-                font-size: 24px;
-                cursor: pointer;
+            .hero p {
+                font-size: 1rem;
             }
-                /* ... your existing responsive code ... */
- /* ===== DARK MODE STYLES ===== */
-    [data-theme="dark"] {
-        /* Dark mode colors */
-        --primary-blue: #3b82f6;
-        --dark-blue: #2563eb;
-        --accent-orange: #fb923c;
-        --white: #1f2937;
-        --light-gray: #111827;
-        --text-dark: #f3f4f6;
-        --card-bg: #374151;
-        --footer-bg: #111827;
-    }
-
-    /* Dark mode toggle button */
-    .dark-mode-toggle {
-        background: transparent;
-        border: 2px solid var(--primary-blue);
-        color: var(--primary-blue);
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        transition: all 0.3s ease;
-        margin-left: 15px;
-    }
-
-    .dark-mode-toggle:hover {
-        background: var(--primary-blue);
-        color: white;
-        transform: scale(1.1);
-    }
-
-    /* Apply dark mode transitions */
-    body {
-        transition: background-color 0.5s ease, color 0.5s ease;
-    }
-
-    header, .service-card, .booking-form, .stat-card, 
-    .services-list, .qrcode-section, .review-form, 
-    .review-card {
-        transition: background-color 0.5s ease;
-    }
-
-    footer {
-        transition: background-color 0.5s ease;
-    }
-
-    .btn-primary, .btn-secondary, .nav-btn, .btn-submit {
-        transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
-    }
-
-    /* Hero section dark mode */
-    [data-theme="dark"] .hero {
-        background: linear-gradient(135deg, #0d4ab5 0%, #1e3a8a 100%);
-    }
-
-    /* Form elements in dark mode */
-    [data-theme="dark"] .form-control {
-        background-color: #4b5563;
-        border-color: #6b7280;
-        color: #f3f4f6;
-    }
-
-    [data-theme="dark"] .form-control::placeholder {
-        color: #9ca3af;
-    }
-
-    /* Service cards in dark mode */
-    [data-theme="dark"] .service-card {
-        border: 1px solid #4b5563;
-    }
-</style>  <!-- MAKE SURE THIS IS HERE -->
+            
+            .trust-badges {
+                gap: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -421,12 +487,11 @@
                     <a href="dashboard.html">Dashboard</a>
                     <a href="reviews.html">Reviews</a>
                     <a href="#contact" class="nav-btn">Call Now</a>
-                     <!-- ADD DARK MODE TOGGLE HERE -->
-    <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun" style="display: none;"></i>
-    </button>
-                </nav>     
+                    <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun" style="display: none;"></i>
+                    </button>
+                </nav>
                 
                 <div class="mobile-menu">
                     <i class="fas fa-bars"></i>
@@ -453,8 +518,8 @@
                 </a>
             </div>
             
-            <a href="tel:+8801712345678" class="call-now-btn">
-                <i class="fas fa-phone-alt"></i> CALL NOW: +880 1537-313652
+            <a href="tel:+8801537313652" class="call-now-btn">
+                <i class="fas fa-phone-alt"></i> CALL NOW: +8801537-313652
             </a>
             
             <div class="trust-badges">
@@ -533,7 +598,7 @@
                     Loading…
                 </iframe>
                 <p style="text-align: center; margin-top: 20px; color: #666;">
-                    <small>Or call directly: +880 1537-313652</small>
+                    <small>Or call directly: +8801537-313652</small>
                 </p>
             </div>
         </div>
@@ -553,7 +618,7 @@
                 
                 <div>
                     <h3>Contact</h3>
-                    <p><i class="fas fa-phone"></i> +880 1537-313652</p>
+                    <p><i class="fas fa-phone"></i> +8801537-313652</p>
                     <p><i class="fas fa-envelope"></i> support@quickfixx.com</p>
                     <p><i class="fas fa-map-marker-alt"></i> Serving all Bangladesh</p>
                 </div>
@@ -563,12 +628,11 @@
                     <p><a href="index.html" style="color: white;">Home</a></p>
                     <p><a href="dashboard.html" style="color: white;">Dashboard</a></p>
                     <p><a href="reviews.html" style="color: white;">Customer Reviews</a></p>
-                    <p><a href="staff.html" style="color: white;">Staff Verification</a></p>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 Quickfixx. All rights reserved. BY HRK78 </p>
+                <p>&copy; 2025 Quickfixx. All rights reserved. BY RK</p>
             </div>
         </div>
     </footer>
@@ -577,56 +641,102 @@
         // Mobile menu toggle
         document.querySelector('.mobile-menu').addEventListener('click', function() {
             const nav = document.querySelector('nav');
-            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            nav.classList.toggle('mobile-active');
+            
+            // Change icon
+            const icon = this.querySelector('i');
+            if (nav.classList.contains('mobile-active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         });
         
-        // Form submission
-        document.querySelectorAll('a[href="#booking"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                const nav = document.querySelector('nav');
+                if (nav.classList.contains('mobile-active')) {
+                    nav.classList.remove('mobile-active');
+                    document.querySelector('.mobile-menu i').classList.remove('fa-times');
+                    document.querySelector('.mobile-menu i').classList.add('fa-bars');
+                }
             });
         });
-            // Your existing JavaScript code...
-    
-    /* ===== DARK MODE JAVASCRIPT ===== */
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const moonIcon = darkModeToggle.querySelector('.fa-moon');
-    const sunIcon = darkModeToggle.querySelector('.fa-sun');
-
-    // Check for saved theme or system preference
-    function initializeTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         
-        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            moonIcon.style.display = 'none';
-            sunIcon.style.display = 'block';
-        }
-    }
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Dark Mode Functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const moonIcon = darkModeToggle.querySelector('.fa-moon');
+        const sunIcon = darkModeToggle.querySelector('.fa-sun');
 
-    function toggleDarkMode() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        if (currentTheme === 'dark') {
-            document.documentElement.removeAttribute('data-theme');
-            moonIcon.style.display = 'block';
-            sunIcon.style.display = 'none';
-            localStorage.setItem('theme', 'light');
-        } else {
+        // Check for saved theme or system preference
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                enableDarkMode();
+            }
+        }
+
+        function enableDarkMode() {
             document.documentElement.setAttribute('data-theme', 'dark');
             moonIcon.style.display = 'none';
             sunIcon.style.display = 'block';
             localStorage.setItem('theme', 'dark');
         }
-    }
 
-    // Initialize theme on page load
-    initializeTheme();
+        function disableDarkMode() {
+            document.documentElement.removeAttribute('data-theme');
+            moonIcon.style.display = 'block';
+            sunIcon.style.display = 'none';
+            localStorage.setItem('theme', 'light');
+        }
 
-    // Add click event to toggle button
-    darkModeToggle.addEventListener('click', toggleDarkMode);
-    /* ===== END DARK MODE JAVASCRIPT ===== */
+        function toggleDarkMode() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        }
+
+        // Initialize theme on page load
+        initializeTheme();
+
+        // Add click event to toggle button
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    enableDarkMode();
+                } else {
+                    disableDarkMode();
+                }
+            }
+        });
     </script>
 </body>
 </html>
