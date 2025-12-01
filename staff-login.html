@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quickfixx Staff Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1a5fce;
+            --accent-orange: #ff6b35;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a5fce 0%, #0d4ab5 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        .login-box {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+        
+        .logo span {
+            color: var(--accent-orange);
+        }
+        
+        .login-box h2 {
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .password-container input {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            border: 2px solid #e1e5eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .password-container input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(26, 95, 206, 0.1);
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .login-btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 16px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        
+        .login-btn:hover {
+            background: #0d4ab5;
+        }
+        
+        .login-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .error-message {
+            color: #dc2626;
+            background: #fef2f2;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 20px;
+            display: none;
+            border: 1px solid #fecaca;
+        }
+        
+        .back-link {
+            display: block;
+            margin-top: 30px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .back-link:hover {
+            color: var(--primary-blue);
+        }
+        
+        .security-note {
+            font-size: 12px;
+            color: #666;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 40px 25px;
+            }
+            
+            body {
+                padding: 15px;
+            }
+        }
+        
+        /* Animation for error */
+        @keyframes shake {
+            0%, 100% {transform: translateX(0);}
+            10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
+            20%, 40%, 60%, 80% {transform: translateX(5px);}
+        }
+        
+        .shake {
+            animation: shake 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="logo">
+                <i class="fas fa-tools"></i>
+                Quick<span>fixx</span>
+            </div>
+            <h2><i class="fas fa-lock"></i> Staff Portal Login</h2>
+            
+            <div class="input-group">
+                <label for="password">Enter Staff Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="Enter password to continue" autocomplete="off">
+                    <button type="button" class="toggle-password" id="togglePassword">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <button class="login-btn" id="loginBtn">
+                <i class="fas fa-sign-in-alt"></i> Access Dashboard
+            </button>
+            
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i> Incorrect password. Please try again.
+            </div>
+            
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Main Website
+            </a>
+            
+            <div class="security-note">
+                <i class="fas fa-shield-alt"></i> This portal is for Quickfixx staff only. Unauthorized access is prohibited.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CORRECT PASSWORD - CHANGE THIS TO YOUR OWN PASSWORD!
+        const CORRECT_PASSWORD = "Quickfixx@2024";
+        
+        // DOM Elements
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        const loginBtn = document.getElementById('loginBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const loginBox = document.querySelector('.login-box');
+        
+        // Toggle password visibility
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+        
+        // Login function
+        function login() {
+            const enteredPassword = passwordInput.value.trim();
+            
+            if (enteredPassword === '') {
+                showError('Please enter the password');
+                return;
+            }
+            
+            if (enteredPassword === CORRECT_PASSWORD) {
+                // Successful login
+                loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting...';
+                loginBtn.disabled = true;
+                
+                // Save login session (for 8 hours)
+                const expires = new Date(Date.now() + 8 * 60 * 60 * 1000).toUTCString();
+                document.cookie = `quickfixx_staff=true; expires=${expires}; path=/`;
+                
+                // Redirect to private dashboard after delay
+                setTimeout(() => {
+                    window.location.href = 'private-dashboard.html';
+                }, 1000);
+                
+            } else {
+                // Wrong password
+                showError();
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+        
+        // Show error with animation
+        function showError(message) {
+            if (message) errorMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+            errorMessage.style.display = 'block';
+            loginBox.classList.add('shake');
+            
+            setTimeout(() => {
+                loginBox.classList.remove('shake');
+            }, 500);
+        }
+        
+        // Event listeners
+        loginBtn.addEventListener('click', login);
+        
+        // Press Enter to login
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+        
+        // Focus password field on load
+        window.onload = function() {
+            passwordInput.focus();
+        };
+        
+        // Check if already logged in
+        function checkExistingLogin() {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                if (cookie.trim().startsWith('quickfixx_staff=true')) {
+                    window.location.href = 'private-dashboard.html';
+                }
+            }
+        }
+        
+        checkExistingLogin();
+    </script>
+</body>
+</html>
