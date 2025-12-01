@@ -421,7 +421,12 @@
                     <a href="dashboard.html">Dashboard</a>
                     <a href="reviews.html">Reviews</a>
                     <a href="#contact" class="nav-btn">Call Now</a>
-                </nav>
+                     <!-- ADD DARK MODE TOGGLE HERE -->
+    <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun" style="display: none;"></i>
+    </button>
+                </nav>     
                 
                 <div class="mobile-menu">
                     <i class="fas fa-bars"></i>
@@ -582,6 +587,46 @@
                 document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
             });
         });
+            // Your existing JavaScript code...
+    
+    /* ===== DARK MODE JAVASCRIPT ===== */
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const moonIcon = darkModeToggle.querySelector('.fa-moon');
+    const sunIcon = darkModeToggle.querySelector('.fa-sun');
+
+    // Check for saved theme or system preference
+    function initializeTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            moonIcon.style.display = 'none';
+            sunIcon.style.display = 'block';
+        }
+    }
+
+    function toggleDarkMode() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            moonIcon.style.display = 'block';
+            sunIcon.style.display = 'none';
+            localStorage.setItem('theme', 'light');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            moonIcon.style.display = 'none';
+            sunIcon.style.display = 'block';
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    // Initialize theme on page load
+    initializeTheme();
+
+    // Add click event to toggle button
+    darkModeToggle.addEventListener('click', toggleDarkMode);
+    /* ===== END DARK MODE JAVASCRIPT ===== */
     </script>
 </body>
 </html>
